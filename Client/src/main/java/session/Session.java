@@ -58,6 +58,8 @@ public class Session implements Runnable {
         executor.execute(commandListener);
         executor.execute(dataListener);
 
+        System.out.println("connected to Anotheria bootcamp server.\n enter BYE to quit.");
+
         executor.shutdown();
     }
 

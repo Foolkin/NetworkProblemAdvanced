@@ -42,10 +42,7 @@ public class CommandSender implements Runnable {
         try (
                 ObjectOutputStream objectOut = new ObjectOutputStream(commandSocket.getOutputStream());
                 Scanner consoleIn = new Scanner(System.in);
-                Scanner inStream = new Scanner(commandSocket.getInputStream());
         ) {
-//            System.out.println(inStream.nextLine());
-
             boolean done = false;
 
             while (!done) {

@@ -76,6 +76,8 @@ public class DataListener implements Runnable {
             throw new RuntimeException("Thread incorrect interrupted", e);
         } catch (IOException e){
             throw new RuntimeException("can't shutdown socket I/O", e);
+        } finally {
+            executor.shutdown();
         }
     }
 }

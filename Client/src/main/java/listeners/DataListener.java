@@ -42,10 +42,9 @@ public class DataListener implements Runnable {
 
     @Override
     public void run() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Directory directory = session.getDirectory();
         try {
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            Directory directory = session.getDirectory();
-
             boolean done = false;
 
             while (!done) {
@@ -73,9 +72,8 @@ public class DataListener implements Runnable {
             }
         } catch (InterruptedException e) {
             throw new RuntimeException("Thread incorrect interrupted", e);
+        } finally {
+            executor.shutdown();
         }
-//        catch (IOException e){
-//            throw new RuntimeException("can't shutdown socket I/O", e);
-//        }
     }
 }

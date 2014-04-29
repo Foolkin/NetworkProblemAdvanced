@@ -65,6 +65,7 @@ public class InputFileTransfer implements Runnable{
                 buffOutStream.write(inStream.read());
                 buffOutStream.flush();
             }
+            System.out.println("Done.");
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }
