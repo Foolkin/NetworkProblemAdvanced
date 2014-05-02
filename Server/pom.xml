@@ -36,7 +36,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>anotheria.bootcamp.fileapp.server.anotheria.bootcamp.fileapp.client.main.Server</mainClass>
+                            <mainClass>anotheria.bootcamp.fileapp.server.main.Server</mainClass>
                         </manifest>
                     </archive>
 
