@@ -36,7 +36,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>main.Client</mainClass>
+                            <mainClass>anotheria.bootcamp.fileapp.client.main.Client</mainClass>
                         </manifest>
                     </archive>
 
