@@ -1,7 +1,6 @@
 package anotheria.bootcamp.fileapp.dataTransfer;
 
-import anotheria.bootcamp.fileapp.directory.Constatns.PropertyNames;
-import anotheria.bootcamp.fileapp.directory.directory.Directory;
+import anotheria.bootcamp.fileapp.directory.directory.DirectoryUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,12 +31,11 @@ public class DirectoryOutputTransfer implements Runnable{
 
     @Override
     public void run() {
-        Directory dir = new Directory(PropertyNames.SERVER_ROOT_DIR);
         try
         {
             PrintWriter bufOutStream = new PrintWriter(socket.getOutputStream(),true);
             String s = "";
-            for(String file : dir.getRootList()) {
+            for(String file : DirectoryUtil.getRootList()) {
                 s += file + " ";
             }
             bufOutStream.println(s);

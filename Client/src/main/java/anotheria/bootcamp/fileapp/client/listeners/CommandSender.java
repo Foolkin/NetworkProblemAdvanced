@@ -77,10 +77,6 @@ public class CommandSender implements Runnable {
                         continue;
                 }
 
-//                if (command.getType() == Commands.PUT && !commandDataSync.fileExist(command.getFileName())) {
-//                    System.out.println("There is no such file, check file name.");
-//                    continue;
-//                }
                 objectOut.writeObject(command);
                 commandDataSynchronizer.setCommand(command);
                 commandDataSynchronizer.notifyDataListener();

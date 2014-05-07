@@ -1,10 +1,10 @@
 package anotheria.bootcamp.fileapp.server.listeners;
 
+import anotheria.bootcamp.fileapp.directory.directory.DirectoryUtil;
 import anotheria.bootcamp.fileapp.server.commandDataSync.CommandDataSynchronizer;
 import anotheria.bootcamp.fileapp.dataTransfer.DirectoryOutputTransfer;
 import anotheria.bootcamp.fileapp.dataTransfer.InputFileTransfer;
 import anotheria.bootcamp.fileapp.dataTransfer.OutputFileTransfer;
-import anotheria.bootcamp.fileapp.directory.directory.Directory;
 import anotheria.bootcamp.fileapp.commands.pojos.Command;
 import anotheria.bootcamp.fileapp.commands.pojos.GetCommand;
 
@@ -42,8 +42,6 @@ public class DataListener implements Runnable {
     @Override
     public void run() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Directory directory = commandDataSynchronizer.getDirectory();
-
         try {
 
             boolean done = false;
@@ -58,13 +56,13 @@ public class DataListener implements Runnable {
                         executor.execute(new DirectoryOutputTransfer(dataSocket));
                         break;
                     case PUT:
-                        executor.execute(new InputFileTransfer(dataSocket, directory.getRootDir()));
+                        executor.execute(new InputFileTransfer(dataSocket, DirectoryUtil.getRootDir()));
                         break;
                     case GET:
                         GetCommand get = (GetCommand)command;
-                        if(!directory.containsFile(get.getFileName()))
+                        if(!DirectoryUtil.containsFile(get.getFileName()))
                             continue;
-                        executor.execute(new OutputFileTransfer(dataSocket, directory.getFile(get.getFileName())));
+                        executor.execute(new OutputFileTransfer(dataSocket, DirectoryUtil.getFile(get.getFileName())));
                         break;
                     case BYE:
                         done = true;

@@ -11,5 +11,20 @@
 
     <artifactId>Directory</artifactId>
 
+    <repositories>
+        <repository>
+            <id>Add_1</id>
+            <name>Anotheria ConfigureMe</name>
+            <url>http://nexus.anotheria.net/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.anotheria</groupId>
+            <artifactId>configureme</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+    </dependencies>
 
 </project>

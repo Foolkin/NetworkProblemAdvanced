@@ -45,9 +45,6 @@ public class CommandListener implements Runnable {
             while (!done) {
                 Command command = (Command) objectIn.readObject();
 
-//                if(command.getType() == Commands.GET && !commandDataSynchronizer.fileExist(command.getFileName())) {
-//                    continue;
-//                }
                 commandDataSynchronizer.setCommand(command);
                 commandDataSynchronizer.notifyDataListener();
 

@@ -4,7 +4,7 @@ import anotheria.bootcamp.fileapp.client.commandDataSync.CommandDataSynchronizer
 import anotheria.bootcamp.fileapp.dataTransfer.DirectoryInputTransfer;
 import anotheria.bootcamp.fileapp.dataTransfer.InputFileTransfer;
 import anotheria.bootcamp.fileapp.dataTransfer.OutputFileTransfer;
-import anotheria.bootcamp.fileapp.directory.directory.Directory;
+import anotheria.bootcamp.fileapp.directory.directory.DirectoryUtil;
 import anotheria.bootcamp.fileapp.commands.pojos.Command;
 import anotheria.bootcamp.fileapp.commands.pojos.PutCommand;
 
@@ -43,7 +43,6 @@ public class DataListener implements Runnable {
     @Override
     public void run() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Directory directory = commandDataSynchronizer.getDirectory();
         try {
 
             while (true) {
@@ -56,14 +55,14 @@ public class DataListener implements Runnable {
                         break;
                     case PUT:
                         PutCommand put = (PutCommand)command;
-                        if(!directory.containsFile(put.getFileName())) {
+                        if(!DirectoryUtil.containsFile(put.getFileName())) {
                             System.out.println("There is no such file, check file name.");
                             continue;
                         }
-                        executor.execute(new OutputFileTransfer(dataSocket, directory.getFile(put.getFileName())));
+                        executor.execute(new OutputFileTransfer(dataSocket, DirectoryUtil.getFile(put.getFileName())));
                         break;
                     case GET:
-                        executor.execute(new InputFileTransfer(dataSocket, directory.getRootDir()));
+                        executor.execute(new InputFileTransfer(dataSocket, DirectoryUtil.getRootDir()));
                         break;
                     case BYE:
                         return;

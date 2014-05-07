@@ -1,0 +1,12 @@
+{
+    "directory": "/users/admin",
+
+    "client": {
+        "directory": "/users/admin/downloads/Anotheria.client/"
+    },
+
+    "server": {
+        "directory": "/users/admin/downloads/Anotheria.server/"
+    }
+
+}

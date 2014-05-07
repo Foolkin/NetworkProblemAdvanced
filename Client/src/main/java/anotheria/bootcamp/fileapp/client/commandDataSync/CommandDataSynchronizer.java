@@ -1,10 +1,9 @@
 package anotheria.bootcamp.fileapp.client.commandDataSync;
 
-import anotheria.bootcamp.fileapp.directory.Constatns.PropertyNames;
-import anotheria.bootcamp.fileapp.directory.directory.Directory;
 import anotheria.bootcamp.fileapp.client.listeners.CommandSender;
 import anotheria.bootcamp.fileapp.client.listeners.DataListener;
 import anotheria.bootcamp.fileapp.commands.pojos.Command;
+import anotheria.bootcamp.fileapp.directory.directory.DirectoryUtil;
 
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -26,11 +25,6 @@ public class CommandDataSynchronizer implements Runnable {
     private Command command;
 
     /**
-     * Directory in which will be stored files.
-     */
-    private Directory directory;
-
-    /**
      * Command handler.
      */
     private Runnable commandListener;
@@ -48,7 +42,6 @@ public class CommandDataSynchronizer implements Runnable {
     public CommandDataSynchronizer(Socket commandSocket, Socket dataSocket) {
         commandListener = new CommandSender(commandSocket, this);
         dataListener = new DataListener(dataSocket, this);
-        directory = new Directory(PropertyNames.CLIENT_ROOT_DIR);
     }
 
     @Override
@@ -73,20 +66,12 @@ public class CommandDataSynchronizer implements Runnable {
     }
 
     /**
-     * This method check if current directory contains file
+     * This method check if current directoryUtil contains file
      * @param fileName file.
-     * @return true if directory contains file.
+     * @return true if directoryUtil contains file.
      */
     public boolean fileExist(String fileName){
-        return directory.containsFile(fileName);
-    }
-
-    /**
-     * Returns current directory.
-     * @return directory.
-     */
-    public Directory getDirectory(){
-        return directory;
+        return DirectoryUtil.containsFile(fileName);
     }
 
     /**
